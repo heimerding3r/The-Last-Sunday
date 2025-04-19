@@ -8,35 +8,29 @@
       font-weight: bold;
       text-align: center;
       margin-top: 50px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    .toggle-container {
-      position: absolute;
+    /* Theme toggle button */
+    #theme-toggle-btn {
+      position: fixed;
       top: 20px;
       right: 20px;
-    }
-
-    #theme-switch {
-      display: none;
-    }
-
-    .switch-label {
+      width: 40px;
+      height: 40px;
+      background-color: #333;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 60px;
-      height: 30px;
-      background-color: #333;
-      border-radius: 30px;
-      padding: 5px;
-      cursor: pointer;
+      justify-content: center;
+      z-index: 1000;
     }
 
-    .switch-label .sun,
-    .switch-label .moon {
-      font-size: 16px;
-      color: white;
-      transition: 0.3s;
+    #theme-toggle-btn img {
+      width: 24px;
+      height: 24px;
     }
 
     body.light-theme {
@@ -161,15 +155,11 @@
   <script type="text/javascript" src="main.js"></script>
 </head>
 
-<body>
-  <!-- Theme Toggle -->
-  <div id="themeToggle" class="toggle-container">
-    <input type="checkbox" id="theme-switch">
-    <label for="theme-switch" class="switch-label">
-      <span class="sun">☀️</span>
-      <span class="moon">🌙</span>
-    </label>
-  </div>
+<body class="dark-theme">
+  <!-- Toggle Theme Button -->
+  <button id="theme-toggle-btn">
+    <img src="sun.png" alt="Toggle Theme" id="theme-icon">
+  </button>
 
   <div id="main">
     <h1 id="weeksLeft"></h1>
@@ -187,8 +177,6 @@
     <div id="mainpane">
       <div id="mainpanegraphic"></div>
     </div>
-
-    <!-- <h2 id="title"></h2> -->
 
     <div id="leftpane">
       <p><strong>If I happen to die soon, my life (so far) will be remembered as</strong></p>
@@ -221,16 +209,18 @@
   </div>
 
   <script>
-    // Default to dark theme
-    document.body.classList.add('dark-theme');
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const icon = document.getElementById('theme-icon');
+    const body = document.body;
 
-    document.getElementById('theme-switch').addEventListener('change', function () {
-      if (this.checked) {
-        document.body.classList.remove('dark-theme');
-        document.body.classList.add('light-theme');
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('light-theme');
+      body.classList.toggle('dark-theme');
+
+      if (body.classList.contains('light-theme')) {
+        icon.src = 'moon.png';
       } else {
-        document.body.classList.remove('light-theme');
-        document.body.classList.add('dark-theme');
+        icon.src = 'sun.png';
       }
     });
   </script>
