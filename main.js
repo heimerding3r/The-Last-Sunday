@@ -210,7 +210,7 @@ var weeksLeft;
 				} else
 				{
 
-					$('#weeksLeft').html("Please tell us your name and when you were born");
+					$('#weeksLeft').html("Please enter your name and when you were born");
 
 					$('#ageInput').show();	
 
